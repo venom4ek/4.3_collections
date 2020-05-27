@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import ru.netology.domain.Issue;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
@@ -35,15 +34,5 @@ public class Repository {
     public boolean addAll(Collection<Issue> items) {
         return issues.addAll(items);
     }
-
-
-
-
-
-
-
-
-
-
 
 }

@@ -54,35 +54,52 @@ public class Manager {
         return result;
     }
 
-    public List<Issue> findByAuthor(String s) {
-        return repository.findAll().stream().filter(issue -> issue.getAuthor().equalsIgnoreCase(s)).collect(Collectors.toList());
-
+    public List<Issue> findByAuthor(Predicate<Issue> predicate) {
+        List<Issue> result = new ArrayList<>();
+        for (Issue issue : repository.findAll()) {
+            if (predicate.test(issue)) {
+                result.add(issue);
+            }
+        }
+        return result;
+//        return repository.findAll().stream().filter(issue -> issue.getAuthor().equalsIgnoreCase(s)).collect(Collectors.toList());
     }
 
-    public HashSet<Issue> filterByLabel(String s) {
+    public HashSet<Issue> filterByAssigned(Set<String> s) {
         HashSet<Issue> result = new HashSet<>();
         for (Issue issue : repository.findAll()) {
-            if (issue.getLabel().contains(s) == true) {
+            if (issue.getAssigned().containsAll(s)) {
                 result.add(issue);
             }
         }
         return result;
     }
 
-    public HashSet<Issue> filterByAssigned(String s) {
+    public Issue updateIssue(int id) {
+        List<Issue> result = new ArrayList<>();
+        for (Issue issue : repository.findAll()) {
+            if (issue.getId() == id ) {
+                if (issue.isOpen() == false) {
+                    issue.setOpen(true);
+
+                    return issue;
+                }
+                if(issue.isOpen() == true) {
+                    issue.setOpen(false);
+                    return issue;
+            }
+        }
+    }
+        return null;
+    }
+
+    public HashSet<Issue> filterByLabel(Set<String> s) {
         HashSet<Issue> result = new HashSet<>();
         for (Issue issue : repository.findAll()) {
-            if (issue.getAssigned().contains(s) == true) {
+            if (issue.getLabel().containsAll(s)) {
                 result.add(issue);
             }
         }
         return result;
     }
-
-    public Predicate<Set> filterByLabelMore(Set<String> s) {
-        Predicate<Set> equalLabels = t -> t.equals(s);
-//        Predicate<Issue> result = issue -> issue.getLabel().contains(s);
-        return equalLabels;
-    }
-
 }
