@@ -3,7 +3,6 @@ package ru.netology.manager;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.jetbrains.annotations.NotNull;
 import ru.netology.domain.Issue;
 import ru.netology.repository.Repository;
 
@@ -12,7 +11,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 
 @Data
@@ -78,18 +76,18 @@ public class Manager {
     public Issue updateIssue(int id) {
         List<Issue> result = new ArrayList<>();
         for (Issue issue : repository.findAll()) {
-            if (issue.getId() == id ) {
+            if (issue.getId() == id) {
                 if (issue.isOpen() == false) {
                     issue.setOpen(true);
 
                     return issue;
                 }
-                if(issue.isOpen() == true) {
+                if (issue.isOpen() == true) {
                     issue.setOpen(false);
                     return issue;
+                }
             }
         }
-    }
         return null;
     }
 

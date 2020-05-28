@@ -5,11 +5,10 @@ import org.junit.jupiter.api.Test;
 import ru.netology.domain.Issue;
 import ru.netology.manager.Manager;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 import static java.util.Arrays.asList;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class RepositoryTest {
     private Repository repository = new Repository();
@@ -77,7 +76,7 @@ class RepositoryTest {
 
     @Test
     public void shouldFilterByMoreOneLabel() {
-        HashSet<Issue> actual = manager.filterByLabel(new HashSet<>(asList("label1","label4")));
+        HashSet<Issue> actual = manager.filterByLabel(new HashSet<>(asList("label1", "label4")));
         HashSet<Issue> expected = new HashSet<>(asList(issue3));
         assertEquals(expected, actual);
     }
@@ -91,11 +90,10 @@ class RepositoryTest {
 
     @Test
     public void shouldFilterByMoreOneAssigned() {
-        HashSet<Issue> actual = manager.filterByAssigned(new HashSet<>(asList("goodMan","user1")));
+        HashSet<Issue> actual = manager.filterByAssigned(new HashSet<>(asList("goodMan", "user1")));
         HashSet<Issue> expected = new HashSet<>(asList(issue1));
         assertEquals(expected, actual);
     }
-
 
     @Test
     void update() {
