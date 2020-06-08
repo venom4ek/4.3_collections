@@ -3,7 +3,7 @@ package ru.netology.repository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.domain.Issue;
-import ru.netology.manager.Manager;
+import ru.netology.manager.IssueManager;
 
 import java.util.*;
 
@@ -11,8 +11,8 @@ import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class RepositoryTest {
-    private Repository repository = new Repository();
-    private Manager manager = new Manager(repository);
+    private IssueRepository repository = new IssueRepository();
+    private IssueManager manager = new IssueManager(repository);
     Collection<Issue> issues = new ArrayList<>();
 
     private Issue issue1 = new Issue(1, "Lem", "2dayAgo", "1hourAgo", new HashSet<>(asList("label1", "label2")), new HashSet<>(asList("user1", "goodMan")), new HashSet<>(asList("добавьте это.", "добавил то.")), true);

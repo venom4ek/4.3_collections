@@ -8,18 +8,17 @@ import lombok.NoArgsConstructor;
 import java.util.Set;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 
-public class Issue {
-    int id;
-    String author;
-    String created;
-    String updated;
-    Set<String> label;
-    Set<String> assigned;
-    Set<String> comment;
-    boolean isOpen;
 
+public class Issue {
+    private int id;
+    private String author;
+    private String dateCreated;
+    private String dateUpdated;
+    private Set<String> label;
+    private Set<String> assigned;
+    private Set<String> comment;
+    private boolean isOpen;
 
 }

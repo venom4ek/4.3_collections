@@ -4,22 +4,24 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.netology.domain.Issue;
-import ru.netology.repository.Repository;
+import ru.netology.repository.IssueRepository;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 
-public class Manager {
+public class IssueManager {
 
-    private Repository repository;
+    private IssueRepository repository;
+
 
     public Issue getById(int id) {
         for (Issue issue : repository.findAll()) {
@@ -32,13 +34,14 @@ public class Manager {
 
     public List<Issue> findOpen() {
 //        return issues.stream().filter(issue -> Boolean.parseBoolean(String.valueOf(issue.isOpen()))).collect(Collectors.toList());
-        List<Issue> result = new ArrayList<>();
-        for (Issue issue : repository.findAll()) {
-            if (issue.isOpen()) {
-                result.add(issue);
-            }
-        }
-        return result;
+        return repository.findAll().stream().filter(Issue::isOpen).collect(Collectors.toList());
+//        List<Issue> result = new ArrayList<>();
+//        for (Issue issue : repository.findAll()) {
+//            if (issue.isOpen()) {
+//                result.add(issue);
+//            }
+//        }
+//        return result;
     }
 
     public List<Issue> findClose() {

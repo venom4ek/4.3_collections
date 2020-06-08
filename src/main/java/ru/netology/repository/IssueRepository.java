@@ -8,12 +8,9 @@ import ru.netology.domain.Issue;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-
-public class Repository {
+public class IssueRepository {
     List<Issue> issues = new ArrayList<>();
 
     public List<Issue> findAll() {
