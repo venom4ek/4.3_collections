@@ -3,6 +3,7 @@ package ru.netology.repository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.domain.Issue;
+import ru.netology.exception.IssueException;
 import ru.netology.manager.IssueManager;
 
 import java.util.*;
@@ -10,7 +11,7 @@ import java.util.*;
 import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class RepositoryTest {
+class IssueManagerAndRepositoryTest {
     private IssueRepository repository = new IssueRepository();
     private IssueManager manager = new IssueManager(repository);
     Collection<Issue> issues = new ArrayList<>();
@@ -101,4 +102,19 @@ class RepositoryTest {
         Issue expected = new Issue(1, "Lem", "2dayAgo", "1hourAgo", new HashSet<>(asList("label1", "label2")), new HashSet<>(asList("user1", "goodMan")), new HashSet<>(asList("добавьте это.", "добавил то.")), false);
         assertEquals(expected, actual);
     }
+
+    @Test
+    void shouldCloseIssueById() {
+        Issue actual = manager.closeById(1);
+        Issue expected = new Issue(1, "Lem", "2dayAgo", "1hourAgo", new HashSet<>(asList("label1", "label2")), new HashSet<>(asList("user1", "goodMan")), new HashSet<>(asList("добавьте это.", "добавил то.")), false);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldOpenIssueById() {
+        Issue actual = manager.openById(5);
+        Issue expected = new Issue(5, "user1", "2dayAgo", "1hourAgo", new HashSet<>(asList("label4", "label5")), new HashSet<>(asList("user1", "guest")), new HashSet<>(asList("добавьте это.", "сделанно.")), true);
+        assertEquals(expected, actual);
+    }
+
 }
