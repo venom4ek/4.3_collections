@@ -1,14 +1,10 @@
 package ru.netology.repository;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import ru.netology.domain.Issue;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Locale;
 
 public class IssueRepository {
     List<Issue> issues = new ArrayList<>();

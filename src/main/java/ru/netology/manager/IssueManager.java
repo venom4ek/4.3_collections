@@ -1,10 +1,7 @@
 package ru.netology.manager;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.netology.domain.Issue;
-import ru.netology.exception.IssueException;
 import ru.netology.repository.IssueRepository;
 
 import java.util.ArrayList;
@@ -14,12 +11,13 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-
-@Data
-@AllArgsConstructor
 @NoArgsConstructor
 
 public class IssueManager {
+
+    public IssueManager(IssueRepository repository) {
+        this.repository = repository;
+    }
 
     private IssueRepository repository;
 
@@ -101,17 +99,19 @@ public class IssueManager {
 //    }
 
     public Issue openById(int id) {
-            if (!getById(id).isOpen()) {
-                getById(id).setOpen(true);
-                return getById(id);
+        Issue issue = getById(id);
+            if (!issue.isOpen()) {
+                issue.setOpen(true);
+                return issue;
             }
         return null;
     }
 
     public Issue closeById(int id) {
-        if (getById(id).isOpen()) {
-            getById(id).setOpen(false);
-            return getById(id);
+        Issue issue = getById(id);
+        if (issue.isOpen()) {
+            issue.setOpen(false);
+            return issue;
         }
         return null;
     }
@@ -140,10 +140,10 @@ public class IssueManager {
 //    }
 
 
-    public HashSet<Issue> filterByLabel(Set<String> s) {
+    public HashSet<Issue> filterByLabel(Set<String> label) {
         HashSet<Issue> result = new HashSet<>();
         for (Issue issue : repository.findAll()) {
-            if (issue.getLabel().containsAll(s)) {
+            if (issue.getLabel().containsAll(label)) {
                 result.add(issue);
             }
         }
