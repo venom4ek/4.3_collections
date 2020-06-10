@@ -21,7 +21,6 @@ public class IssueManager {
 
     private IssueRepository repository;
 
-
     public Issue getById(int id) {
         for (Issue issue : repository.findAll()) {
             if (issue.getId() == id) {
@@ -55,7 +54,6 @@ public class IssueManager {
             }
         }
         return result;
-//        return repository.findAll().stream().filter(issue -> issue.getAuthor().equalsIgnoreCase(s)).collect(Collectors.toList());
     }
 
     public HashSet<Issue> filterByAssigned(Set<String> s) {
@@ -68,76 +66,21 @@ public class IssueManager {
         return result;
     }
 
-    public Issue updateIssue(int id) {
-        List<Issue> result = new ArrayList<>();
-        for (Issue issue : repository.findAll()) {
-            if (issue.getId() == id) {
-                if (issue.isOpen() == false) {
-                    issue.setOpen(true);
-
-                    return issue;
-                }
-                if (issue.isOpen() == true) {
-                    issue.setOpen(false);
-                    return issue;
-                }
-            }
-        }
-        return null;
-    }
-
-//    public Issue openById(int id) throws IssueException {
-//        for (Issue issue : repository.findAll()) {
-//            if (issue.isOpen()) {
-//                throw new IssueException("Issue with id " + id + " is already open");
-//            }
-//            else {
-//                issue.setOpen(true);
-//            }
-//        }
-//        return null;
-//    }
-
     public Issue openById(int id) {
         Issue issue = getById(id);
-            if (!issue.isOpen()) {
-                issue.setOpen(true);
-                return issue;
-            }
-        return null;
+        if (!issue.isOpen()) {
+            issue.setOpen(true);
+        }
+        return issue;
     }
 
     public Issue closeById(int id) {
         Issue issue = getById(id);
         if (issue.isOpen()) {
             issue.setOpen(false);
-            return issue;
         }
-        return null;
+        return issue;
     }
-
-//    public Issue closeById(int id) throws IssueException {
-//        for (Issue issue : repository.findAll()) {
-//            if (!issue.isOpen()) {
-//                throw new IssueException("Issue with id " + id + " is already closed");
-//            }
-//            else {
-//                issue.setOpen(false);
-//            }
-//        }
-//        return null;
-//    }
-
-
-//    public Issue closeById(int id) {
-//        for (Issue issue : repository.findAll()) {
-//            if (issue.isOpen()) {
-//                issue.setOpen(false);
-//                return issue;
-//            }
-//        }
-//        return null;
-//    }
 
 
     public HashSet<Issue> filterByLabel(Set<String> label) {

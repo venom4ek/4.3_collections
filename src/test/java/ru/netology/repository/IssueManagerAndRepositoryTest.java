@@ -97,13 +97,6 @@ class IssueManagerAndRepositoryTest {
     }
 
     @Test
-    void update() {
-        Issue actual = manager.updateIssue(1);
-        Issue expected = new Issue(1, "Lem", "2dayAgo", "1hourAgo", new HashSet<>(asList("label1", "label2")), new HashSet<>(asList("user1", "goodMan")), new HashSet<>(asList("добавьте это.", "добавил то.")), false);
-        assertEquals(expected, actual);
-    }
-
-    @Test
     void shouldCloseIssueById() {
         Issue actual = manager.closeById(1);
         Issue expected = new Issue(1, "Lem", "2dayAgo", "1hourAgo", new HashSet<>(asList("label1", "label2")), new HashSet<>(asList("user1", "goodMan")), new HashSet<>(asList("добавьте это.", "добавил то.")), false);

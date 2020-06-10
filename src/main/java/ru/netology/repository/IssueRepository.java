@@ -28,6 +28,4 @@ public class IssueRepository {
     public boolean addAll(Collection<Issue> items) {
         return issues.addAll(items);
     }
-
-
 }
